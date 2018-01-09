@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.mytrekadvisor.web.dao"></context:component-scan>
+
+
+	<beans profile="production">
+		<bean
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="location">
+				<value>classpath:com/securemessaging/config/jdbc.properties
+				</value>
+			</property>
+		</bean>
+
+		<bean id="dataSource"
+			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${jdbc.driver}"></property>
+			<property name="url" value="${jdbc.url}"></property>
+			<property name="password" value="${jdbc.password}"></property>
+			<property name="username" value="${jdbc.username}"></property>
+		</bean>
+
+
+		<!-- <bean id="sessionFactory"
+			class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.current_session_context_class">thread</prop>
+				</props>
+			</property>
+			<property name="packagesToScan">
+				<list>
+					<value>com.mytrekadvisor.web.dao</value>
+				</list>
+			</property>
+
+			<property name="annotatedClasses">
+				<list>
+				 <value>com.mytrekadvisor.web.dao.Offer</value>
+					<value>com.mytrekadvisor.web.dao.User</value>
+					<value>com.mytrekadvisor.web.dao.UserRole</value>
+				 <value>com.mytrekadvisor.web.dao.Category</value>
+					<value>com.mytrekadvisor.web.dao.Post</value>
+				</list>
+			</property>
+		</bean>
+ -->
+	</beans>
+
+
+</beans>
